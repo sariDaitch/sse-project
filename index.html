@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSE Time Updates</title>
+</head>
+<body>
+    <h1>Current Time:</h1>
+    <div id="time"></div>
+
+    <script>
+        const eventSource = new EventSource('/time');
+        
+        eventSource.onmessage = function(event) {
+            document.getElementById('time').textContent = event.data;
+        };
+
+        eventSource.onerror = function() {
+            console.log('Connection closed or error occurred');
+        };
+    </script>
+</body>
+</html>
